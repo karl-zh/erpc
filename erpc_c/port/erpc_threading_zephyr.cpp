@@ -11,7 +11,7 @@
 
 #if ERPC_THREADS_IS(ZEPHYR)
 
-using namespace erpc;
+using namespace erpc/;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Code
@@ -135,7 +135,7 @@ bool Semaphore::get(uint32_t timeout)
 
 int Semaphore::getCount(void) const
 {
-    return k_sem_count_get(m_sem));
+    return k_sem_count_get(m_sem);
 }
 #endif /* ERPC_THREADS_IS(FREERTOS) */
 

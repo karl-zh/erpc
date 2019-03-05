@@ -47,7 +47,7 @@ typedef long speed_t;
 #include <sys/select.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <termios.h>
+//#include <termios.h>
 #include <unistd.h>
 
 #endif
@@ -62,7 +62,7 @@ typedef long speed_t;
 extern "C" {
 #endif
 
-int serial_setup(int fd, speed_t speed);
+int serial_setup(int fd, long speed);
 int serial_set_read_timeout(int fd, uint8_t vtime, uint8_t vmin);
 int serial_write(int fd, char *buf, int size);
 int serial_read(int fd, char *buf, int size);

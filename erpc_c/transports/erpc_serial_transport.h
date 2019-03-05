@@ -12,7 +12,7 @@
 
 #include "erpc_framed_transport.h"
 #include <string>
-#include <termios.h>
+//#include <termios.h>
 
 /*!
  * @addtogroup serial_transport
@@ -39,7 +39,7 @@ public:
      * @param[in] portName Port name.
      * @param[in] baudRate Baudrate.
      */
-    SerialTransport(const char *portName, speed_t baudRate);
+    SerialTransport(const char *portName, long baudRate);
 
     /*!
      * @brief Destructor.
@@ -82,7 +82,7 @@ private:
 private:
     int m_serialHandle;     /*!< Serial handle id. */
     const char *m_portName; /*!< Port name. */
-    speed_t m_baudRate;     /*!< Bauderate. */
+    long m_baudRate;     /*!< Bauderate. */
 };
 
 } // namespace erpc

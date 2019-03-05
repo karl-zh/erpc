@@ -12,7 +12,7 @@
 #include "erpc_serial.h"
 #include <cstdio>
 #include <string>
-#include <termios.h>
+//#include <termios.h>
 
 using namespace erpc;
 
@@ -20,7 +20,7 @@ using namespace erpc;
 // Code
 ////////////////////////////////////////////////////////////////////////////////
 
-SerialTransport::SerialTransport(const char *portName, speed_t baudRate)
+SerialTransport::SerialTransport(const char *portName, long baudRate)
 : m_serialHandle(0)
 , m_portName(portName)
 , m_baudRate(baudRate)
@@ -34,27 +34,7 @@ SerialTransport::~SerialTransport(void)
 
 erpc_status_t SerialTransport::init(uint8_t vtime, uint8_t vmin)
 {
-    m_serialHandle = serial_open(m_portName);
-    if (-1 == m_serialHandle)
-    {
-        return kErpcStatus_InitFailed;
-    }
-    if (!isatty(m_serialHandle))
-    {
-        return kErpcStatus_InitFailed;
-    }
-    if (-1 == serial_setup(m_serialHandle, m_baudRate))
-    {
-        return kErpcStatus_InitFailed;
-    }
-    if (-1 == serial_set_read_timeout(m_serialHandle, vtime, vmin))
-    {
-        return kErpcStatus_InitFailed;
-    }
-    if (-1 == tcflush(m_serialHandle, TCIOFLUSH))
-    {
-        return kErpcStatus_InitFailed;
-    }
+    serial_open(m_portName);
     return kErpcStatus_Success;
 }
 

@@ -50,7 +50,7 @@
         #define ERPC_THREADS (ERPC_THREADS_NONE)
     #endif
 #endif
-
+#undef ERPC_THREADS
 // Handy macro to test threading model. You can also ERPC_THREADS directly to test for threading
 // support, i.e. "#if ERPC_THREADS", because ERPC_THREADS_NONE has a value of 0.
 #define ERPC_THREADS_IS(_n_) (ERPC_THREADS == (ERPC_THREADS_##_n_))
