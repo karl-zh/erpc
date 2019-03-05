@@ -60,15 +60,14 @@ SOURCES += 	$(ERPC_C_ROOT)/infra/erpc_arbitrated_client_manager.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_server.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_simple_server.cpp \
 			$(ERPC_C_ROOT)/infra/erpc_transport_arbitrator.cpp \
-			$(ERPC_C_ROOT)/port/erpc_port_stdlib.cpp \
-			$(ERPC_C_ROOT)/port/erpc_threading_pthreads.cpp \
-			$(ERPC_C_ROOT)/port/erpc_serial.cpp \
+			$(ERPC_C_ROOT)/port/erpc_port_zephyr.cpp \
+			$(ERPC_C_ROOT)/port/erpc_threading_zephyr.cpp \
 			$(ERPC_C_ROOT)/setup/erpc_arbitrated_client_setup.cpp \
 			$(ERPC_C_ROOT)/setup/erpc_client_setup.cpp \
 			$(ERPC_C_ROOT)/setup/erpc_server_setup.cpp \
 			$(ERPC_C_ROOT)/setup/erpc_setup_serial.cpp \
 			$(ERPC_C_ROOT)/transports/erpc_inter_thread_buffer_transport.cpp \
-			$(ERPC_C_ROOT)/transports/erpc_serial_transport.cpp \
+			$(ERPC_C_ROOT)/transports/erpc_serial_openamp_transport.cpp \
 			$(ERPC_C_ROOT)/transports/erpc_tcp_transport.cpp
 
 HEADERS += 	$(ERPC_C_ROOT)/config/erpc_config.h \
