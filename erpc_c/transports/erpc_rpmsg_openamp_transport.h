@@ -4,15 +4,17 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef _EMBEDDED_RPC__RPMSG_OPENAMP_RTOS_TRANSPORT_H_
-#define _EMBEDDED_RPC__RPMSG_OPENAMP_RTOS_TRANSPORT_H_
+#ifndef _EMBEDDED_RPC__RPMSG_OPENAMP_TRANSPORT_H_
+#define _EMBEDDED_RPC__RPMSG_OPENAMP_TRANSPORT_H_
 
 #include "erpc_framed_transport.h"
+#include "openamp/remoteproc.h"
+//#include "openamp/rpmsg.h"
+//#include "openamp/hil.h"
 #include <string>
-//#include <termios.h>
 
 /*!
- * @addtogroup serial_transport
+ * @addtogroup rpmsg_openAMP_transport
  * @{
  * @file
  */
@@ -23,11 +25,11 @@
 
 namespace erpc {
 /*!
- * @brief Serial transport layer for host PC
+ * @brief RPMSG openAMP transport layer for host PC
  *
- * @ingroup serial_transport
+ * @ingroup rpmsg_openAMP_transport
  */
-class SerialTransport : public FramedTransport
+class RpmsgOpenAMPTransport : public FramedTransport
 {
 public:
     /*!
@@ -36,12 +38,12 @@ public:
      * @param[in] portName Port name.
      * @param[in] baudRate Baudrate.
      */
-    SerialTransport(const char *portName, long baudRate);
+    RpmsgOpenAMPTransport(const char *portName, long baudRate);
 
     /*!
      * @brief Destructor.
      */
-    virtual ~SerialTransport(void);
+    virtual ~RpmsgOpenAMPTransport(void);
 
     /*!
      * @brief Initialize Serial peripheral.
@@ -55,31 +57,38 @@ public:
 
 private:
     /*!
-     * @brief Write data to Serial peripheral.
+     * @brief Write data to rpmsg end point.
      *
      * @param[in] data Buffer to send.
      * @param[in] size Size of data to send.
      *
-     * @retval kErpcStatus_ReceiveFailed Serial failed to receive data.
+     * @retval kErpcStatus_ReceiveFailed rpmsg failed to receive data.
      * @retval kErpcStatus_Success Successfully received all data.
      */
     virtual erpc_status_t underlyingSend(const uint8_t *data, uint32_t size);
 
     /*!
-     * @brief Receive data from Serial peripheral.
+     * @brief Receive data from rpmsg end point.
      *
      * @param[inout] data Preallocated buffer for receiving data.
      * @param[in] size Size of data to read.
      *
-     * @retval kErpcStatus_ReceiveFailed Serial failed to receive data.
+     * @retval kErpcStatus_ReceiveFailed rpmsg failed to receive data.
      * @retval kErpcStatus_Success Successfully received all data.
      */
     virtual erpc_status_t underlyingReceive(uint8_t *data, uint32_t size);
 
 private:
-    int m_serialHandle;     /*!< Serial handle id. */
-    const char *m_portName; /*!< Port name. */
-    long m_baudRate;     /*!< Bauderate. */
+	struct rsc_table_info rsc_info;
+//	struct hil_proc *proc;
+
+//	struct rpmsg_channel *rp_channel;
+//	struct rpmsg_endpoint *rp_endpoint;
+
+	int m_serialHandle; 	/*!< Serial handle id. */
+	const char *m_portName; /*!< Port name. */
+	long m_baudRate; 	/*!< Bauderate. */
+
 };
 
 } // namespace erpc
@@ -87,7 +96,7 @@ private:
 /*! @} */
 
 /*!
- * @addtogroup port_serial
+ * @addtogroup port_rpmsg_openamp
  * @{
  * @file
  */
@@ -109,4 +118,4 @@ extern int serial_close(int fd);
 
 /*! @} */
 
-#endif // _EMBEDDED_RPC__RPMSG_OPENAMP_RTOS_TRANSPORT_H_
+#endif // _EMBEDDED_RPC__RPMSG_OPENAMP_TRANSPORT_H_

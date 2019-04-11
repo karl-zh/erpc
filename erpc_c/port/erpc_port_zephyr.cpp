@@ -10,7 +10,50 @@
 #include <new>
 
 extern "C" {
-#include "kernel.h"
+//#include "kernel.h"
+/**
+ * @brief Allocate memory from heap.
+ *
+ * This routine provides traditional malloc() semantics. Memory is
+ * allocated from the heap memory pool.
+ *
+ * @param size Amount of memory requested (in bytes).
+ *
+ * @return Address of the allocated memory if successful; otherwise NULL.
+ * @req K-HEAP-001
+ */
+extern void *k_malloc(size_t size);
+
+/**
+ * @brief Free memory allocated from heap.
+ *
+ * This routine provides traditional free() semantics. The memory being
+ * returned must have been allocated from the heap memory pool or
+ * k_mem_pool_malloc().
+ *
+ * If @a ptr is NULL, no operation is performed.
+ *
+ * @param ptr Pointer to previously allocated memory.
+ *
+ * @return N/A
+ * @req K-HEAP-001
+ */
+extern void k_free(void *ptr);
+
+/**
+ * @brief Allocate memory from heap, array style
+ *
+ * This routine provides traditional calloc() semantics. Memory is
+ * allocated from the heap memory pool and zeroed.
+ *
+ * @param nmemb Number of elements in the requested array
+ * @param size Size of each array element (in bytes).
+ *
+ * @return Address of the allocated memory if successful; otherwise NULL.
+ * @req K-HEAP-001
+ */
+extern void *k_calloc(size_t nmemb, size_t size);
+
 };
 
 using namespace std;
