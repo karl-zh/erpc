@@ -9,7 +9,7 @@
 
 #include "erpc_framed_transport.h"
 #include "openamp/remoteproc.h"
-//#include "openamp/rpmsg.h"
+#include "openamp/rpmsg.h"
 //#include "openamp/hil.h"
 #include <string>
 
@@ -82,8 +82,8 @@ private:
 	struct rsc_table_info rsc_info;
 //	struct hil_proc *proc;
 
-//	struct rpmsg_channel *rp_channel;
-//	struct rpmsg_endpoint *rp_endpoint;
+	struct rpmsg_channel *rp_channel;
+	struct rpmsg_endpoint *rp_endpoint;
 
 	int m_serialHandle; 	/*!< Serial handle id. */
 	const char *m_portName; /*!< Port name. */
