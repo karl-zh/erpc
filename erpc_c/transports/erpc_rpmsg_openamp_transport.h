@@ -80,7 +80,7 @@ private:
 
 private:
 	struct rsc_table_info rsc_info;
-//	struct hil_proc *proc;
+	struct hil_proc *proc;
 
 	struct rpmsg_channel *rp_channel;
 	struct rpmsg_endpoint *rp_endpoint;

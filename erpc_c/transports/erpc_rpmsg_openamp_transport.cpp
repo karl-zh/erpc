@@ -17,7 +17,8 @@ using namespace erpc;
 ////////////////////////////////////////////////////////////////////////////////
 
 RpmsgOpenAMPTransport::RpmsgOpenAMPTransport(const char *portName, long baudRate)
-: m_serialHandle(0)
+: proc(0)
+, m_serialHandle(0)
 , m_portName(portName)
 , m_baudRate(baudRate)
 {
