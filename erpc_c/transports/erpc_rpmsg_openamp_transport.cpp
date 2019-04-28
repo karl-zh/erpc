@@ -16,34 +16,33 @@ using namespace erpc;
 // Code
 ////////////////////////////////////////////////////////////////////////////////
 
-RpmsgOpenAMPTransport::RpmsgOpenAMPTransport(const char *portName, long baudRate)
-: proc(0)
-, m_serialHandle(0)
-, m_portName(portName)
-, m_baudRate(baudRate)
+RpmsgOpenAMPTransport::RpmsgOpenAMPTransport(void)
+: ept(0)
 {
 }
 
 RpmsgOpenAMPTransport::~RpmsgOpenAMPTransport(void)
 {
-    serial_close(m_serialHandle);
+	rpmsg_destroy_ept(ept);
 }
 
-erpc_status_t RpmsgOpenAMPTransport::init(uint8_t vtime, uint8_t vmin)
+erpc_status_t RpmsgOpenAMPTransport::init(rpmsg_endpoint *ep)
 {
-    serial_open(m_portName);
+    ept = ep;
     return kErpcStatus_Success;
 }
 
 erpc_status_t RpmsgOpenAMPTransport::underlyingSend(const uint8_t *data, uint32_t size)
 {
-    uint32_t bytesWritten = serial_write(m_serialHandle, (char *)data, size);
+    uint32_t bytesWritten = rpmsg_send(ept, (char *)data, size);
+
+//    uint32_t bytesWritten = serial_write(m_serialHandle, (char *)data, size);
 
     return size != bytesWritten ? kErpcStatus_SendFailed : kErpcStatus_Success;
 }
 erpc_status_t RpmsgOpenAMPTransport::underlyingReceive(uint8_t *data, uint32_t size)
 {
-    uint32_t bytesRead = serial_read(m_serialHandle, (char *)data, size);
+    uint32_t bytesRead = rpmsg_read(ept, (char *)data, size);
 
     return size != bytesRead ? kErpcStatus_ReceiveFailed : kErpcStatus_Success;
 }

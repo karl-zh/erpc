@@ -21,12 +21,10 @@ static ManuallyConstructed<RpmsgOpenAMPTransport> s_transport;
 // Code
 ////////////////////////////////////////////////////////////////////////////////
 
-erpc_transport_t erpc_transport_rpmsg_openamp_init(const char *portName, long baudRate)
+erpc_transport_t erpc_transport_rpmsg_openamp_init(void *ep)
 {
-    const uint8_t vtime = 0;
-    const uint8_t vmin = 1;
-    s_transport.construct(portName, baudRate);
-    if (s_transport->init(vtime, vmin) == kErpcStatus_Success)
+    s_transport.construct();
+    if (s_transport->init((rpmsg_endpoint *)ep) == kErpcStatus_Success)
     {
         return reinterpret_cast<erpc_transport_t>(s_transport.get());
     }

@@ -38,7 +38,7 @@ public:
      * @param[in] portName Port name.
      * @param[in] baudRate Baudrate.
      */
-    RpmsgOpenAMPTransport(const char *portName, long baudRate);
+    RpmsgOpenAMPTransport(void);
 
     /*!
      * @brief Destructor.
@@ -53,7 +53,7 @@ public:
      *
      * @return Status of init function.
      */
-    erpc_status_t init(uint8_t vtime, uint8_t vmin);
+    erpc_status_t init(rpmsg_endpoint *ep);
 
 private:
     /*!
@@ -79,16 +79,7 @@ private:
     virtual erpc_status_t underlyingReceive(uint8_t *data, uint32_t size);
 
 private:
-	struct rsc_table_info rsc_info;
-	struct hil_proc *proc;
-
-	struct rpmsg_channel *rp_channel;
-	struct rpmsg_endpoint *rp_endpoint;
-
-	int m_serialHandle; 	/*!< Serial handle id. */
-	const char *m_portName; /*!< Port name. */
-	long m_baudRate; 	/*!< Bauderate. */
-
+	struct rpmsg_endpoint *ept;
 };
 
 } // namespace erpc
@@ -105,12 +96,11 @@ private:
 extern "C" {
 #endif
 
-extern int serial_setup(int fd, long speed);
-extern int serial_set_read_timeout(int fd, uint8_t vtime, uint8_t vmin);
-extern int serial_write(int fd, char *buf, int size);
-extern int serial_read(int fd, char *buf, int size);
-extern int serial_open(const char *port);
-extern int serial_close(int fd);
+extern int rpmsg_send(struct rpmsg_endpoint *ept, const void *data,
+			     int len);
+extern int rpmsg_read(struct rpmsg_endpoint *ept, char *data,
+			     int len);
+extern void rpmsg_destroy_ept(struct rpmsg_endpoint *ept);
 
 #if __cplusplus
 }
