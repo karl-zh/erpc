@@ -96,9 +96,9 @@ private:
 extern "C" {
 #endif
 
-extern int rpmsg_send(struct rpmsg_endpoint *ept, const void *data,
+extern int rpmsg_openamp_send(struct rpmsg_endpoint *ept, const void *data,
 			     int len);
-extern int rpmsg_read(struct rpmsg_endpoint *ept, char *data,
+extern int rpmsg_openamp_read(struct rpmsg_endpoint *ept, char *data,
 			     int len);
 extern void rpmsg_destroy_ept(struct rpmsg_endpoint *ept);
 

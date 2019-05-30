@@ -34,7 +34,7 @@ erpc_status_t RpmsgOpenAMPTransport::init(rpmsg_endpoint *ep)
 
 erpc_status_t RpmsgOpenAMPTransport::underlyingSend(const uint8_t *data, uint32_t size)
 {
-    uint32_t bytesWritten = rpmsg_send(ept, (char *)data, size);
+    uint32_t bytesWritten = rpmsg_openamp_send(ept, (char *)data, size);
 
 //    uint32_t bytesWritten = serial_write(m_serialHandle, (char *)data, size);
 
@@ -42,7 +42,7 @@ erpc_status_t RpmsgOpenAMPTransport::underlyingSend(const uint8_t *data, uint32_
 }
 erpc_status_t RpmsgOpenAMPTransport::underlyingReceive(uint8_t *data, uint32_t size)
 {
-    uint32_t bytesRead = rpmsg_read(ept, (char *)data, size);
+    uint32_t bytesRead = rpmsg_openamp_read(ept, (char *)data, size);
 
     return size != bytesRead ? kErpcStatus_ReceiveFailed : kErpcStatus_Success;
 }

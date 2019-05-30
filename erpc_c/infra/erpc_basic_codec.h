@@ -382,7 +382,7 @@ public:
      *
      * @return Pointer to created codec.
      */
-    virtual BasicCodec *create(void) { return new (std::nothrow) BasicCodec; }
+    virtual BasicCodec *create(void) { return new BasicCodec; }
 
     /*!
      * @brief Dispose codec.

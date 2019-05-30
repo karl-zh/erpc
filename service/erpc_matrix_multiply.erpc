@@ -1,0 +1,35 @@
+program erpc_matrix_multiply
+
+/*! This const defines the matrix size. The value has to be the same as the 
+    Matrix array dimension. Do not forget to re-generate the erpc code once the 
+    matrix size is changed in the erpc file */
+const int32 matrix_size = 5;
+
+/*! This is the matrix array type. The dimension has to be the same as the 
+    matrix size const. Do not forget to re-generate the erpc code once the 
+    matrix size is changed in the erpc file */
+type Matrix = int32[matrix_size][matrix_size];
+
+interface MatrixMultiplyService {
+    erpcMatrixMultiply(in Matrix matrix1, in Matrix matrix2, out Matrix result_matrix) -> void
+}
+
+interface PsaFrameworkVersionService {
+    psa_framework_version() -> uint32
+}
+
+interface PsaVersionService {
+    psa_version(in uint32 sid) -> uint32
+}
+
+interface PsaConnectService {
+    psa_connect(in uint32 sid, in uint32 minor_version) -> int32
+}
+
+interface PsaCallService {
+    psa_call(in int32 handle, in int32 in_vec, in uint32 in_len, in int32 out_vec, in uint32 out_len) -> int32
+}
+
+interface PsaCloseService {
+    psa_close(in int32 ma) -> void
+}
