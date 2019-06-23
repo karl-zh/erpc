@@ -77,7 +77,7 @@ INCLUDE_DIRECTORIES(${ProjDirPath}/../erpc_c/include_ztest)
 INCLUDE_DIRECTORIES(${ProjDirPath}/../../../service)
 INCLUDE_DIRECTORIES(${ProjDirPath}/../ext_lib)
 
-add_library(erpc_server STATIC
+add_library(liberpc_server.a STATIC
     "${ProjDirPath}/../erpc_c/infra/erpc_server.cpp"
     "${ProjDirPath}/../erpc_c/infra/erpc_server.h"
     "${ProjDirPath}/../erpc_c/infra/erpc_simple_server.cpp"
@@ -123,7 +123,10 @@ add_library(erpc_server STATIC
 #    "${ProjDirPath}/../service/erpc_psa_api_client.cpp"
 )
 
-add_library(erpc_client STATIC
+#install (TARGETS liberpc_server.a ARCHIVE DESTINATION ${MAKE_INSTALL_PREFIX} )
+install (TARGETS liberpc_server.a ARCHIVE DESTINATION lib LIBRARY DESTINATION lib COMPONENT library )
+
+add_library(liberpc_client.a STATIC
     "${ProjDirPath}/../erpc_c/infra/erpc_server.cpp"
     "${ProjDirPath}/../erpc_c/infra/erpc_server.h"
     "${ProjDirPath}/../erpc_c/infra/erpc_simple_server.cpp"
@@ -168,3 +171,5 @@ add_library(erpc_client STATIC
 #    "${ProjDirPath}/../service/erpc_psa_api_server.cpp"
     "${ProjDirPath}/../service/erpc_psa_api_client.cpp"
 )
+
+install (TARGETS liberpc_client.a ARCHIVE DESTINATION lib LIBRARY DESTINATION lib COMPONENT library )
