@@ -42,7 +42,7 @@ interface PsaConnectService {
 }
 
 interface PsaCallService {
-    psa_call(in psa_handle_t handle, in uint32 in_vec, in uint32 in_len, in uint32 out_vec, in uint32 out_len) -> psa_status_t
+    psa_call(in psa_handle_t handle, in uint32 TYPE, in uint32 in_vec, in uint32 in_len, in uint32 out_vec, in uint32 out_len) -> psa_status_t
 }
 
 interface PsaCloseService {
